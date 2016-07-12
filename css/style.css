@@ -1,0 +1,152 @@
+/* 
+    Document   : style
+    Created on : Jun 27, 2016, 1:42:34 PM
+    Author     : FRANKCHUKY
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+  
+    
+}
+
+
+body{
+overflow-y: hidden;
+overflow-x: hidden;
+ resize: both;
+}
+
+img{
+    width: 40%;
+}
+
+body h1{
+    text-align: center;
+    font-family: sans-serif;
+    color: #8082ee;
+    font-size: 25px;
+    font-weight: bolder;       
+}
+
+.navigation-bar{
+    text-align: center;
+    color: blue;
+    font-size: 20px;
+    
+    line-height: 250%;
+    background-color: #96bafa;
+    
+}
+
+
+
+div.navigation-bar a{
+   text-decoration: none;
+   color: #525454;
+}
+
+
+
+
+
+div.col-sm-2{
+   
+    background-color: #e3e3e4;
+    height: 84%;
+    font-size: 25px;
+    color: black;
+    text-align: left;
+    overflow-y: hidden;
+    
+   
+}
+
+
+
+
+body h2{
+    text-align: left;
+    font-style: normal;
+    padding-left: 13px;
+    font-size: 20px;
+   
+}
+
+
+body div.col-sm-10{
+    color: black;    
+    text-align: center;
+    height: 83%;
+    overflow-y: scroll;
+    padding-right: 10%;
+    width: 82.3%;
+    
+}
+
+
+
+
+div.col-sm-2:hover{
+    overflow-y: scroll;
+   
+}
+
+
+
+#otherbooks{
+    font-size: 60%;
+    text-align: left;
+    padding-left: 13px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    line-height: 200%;
+    
+    
+}
+
+
+
+
+#otherbooks a{   
+    color: black;
+    text-decoration: none;
+}
+
+#otherbooks a:hover{
+   
+    text-decoration: underline;    
+   
+   
+}
+
+#otherbooks a:focus{    
+    background-color: #8082ee;
+    text-decoration: none;
+    color: white;
+}
+
+
+
+
+
+div.about{
+   color: gray;
+   font-size: 90%;
+ 
+  
+}
+
+#row-top{
+ color: black;
+}
+
+.alert alert-info{
+    padding-bottom: 0px;
+    color: black;
+}
+
+#menu-icon{
+    padding-top: 15%;
+}

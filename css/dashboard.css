@@ -1,0 +1,31 @@
+/* 
+    Document   : dashboard
+    Created on : Jul 4, 2016, 10:11:09 PM
+    Author     : FRANKCHUKY
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#details{   
+    font-size: 18px;    
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+}
+
+h1{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#well-nav{
+ 
+}
+
+#news{
+    overflow-y: auto;
+}
