@@ -1,12 +1,4 @@
-<?php
-if(isset($_GET['logout'])){
-    if($_COOKIE[session_name()]){
-        setcookie(session_name(), '', time()-45363);
-    }
-    session_destroy();
-    header('location: /recordbreakers/php/network-log-in.php');
-}
-?>
+
 
 <!DOCTYPE.html>
 <html>
@@ -45,7 +37,7 @@ if(isset($_GET['logout'])){
                          Messages
                      </div>
                      <div class="col-sm-2">
-                         <i class="fa fa-camera"></i><span> <a href="/recordbreakers/php/network-dash-board.php?logout=1">  logout</a></span>
+                         <i class="fa fa-camera"></i><span> <a href="/recordbreakers/php/network-log-in.php?logout=true">  logout</a></span>
                      </div>
              </div>
              </div>

@@ -1,19 +1,31 @@
 <?php
-session_start();
-include 'session.php';
+   session_start();
+if(isset($_GET['logout'])){
+    $_SESSION=array();
+    if(ini_get("session.use_cookies")){
+        $params = session_get_cookie_params();
+        setcookie(session_name(),'/',time()-42000, $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]);
+    }
+    session_destroy();
+    //header('location: /recordbreakers/php/network-log-in.php');
+}else{
+
 if(isset($_SESSION['id'])){
     header('location: /recordbreakers/php/network-dash-board.php');
 }
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {    
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ 
   $username = $_POST["username"];
   $password =$_POST["password"];
   $_SESSION['id']='logger';
-  header('Location: /recordbreakers/php/network-dash-board.php?id='.session_id());
+  header('Location: /recordbreakers/php/network-dash-board.php?'.session_id());
 }
-
+}
 ?>
+
 <!DOCTYPE.html>
  <html>
      <head>
@@ -81,6 +93,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       
                   </div>
               </div>
-<?php
-
-?>
