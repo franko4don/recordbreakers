@@ -1,3 +1,27 @@
+<?php
+
+include 'classes.php';
+$form=new FormProcess;
+$info="";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitSignUpForm'])) {
+    
+echo $form->signUp($_POST['username'], $_POST['fullname'], $_POST['password'], $_POST['email'], $_POST['gender'],$_POST['confirmpassword']);   
+    
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitSignInForm'])) {
+    echo $info=$form->signIn($_POST['username1'], $_POST['password1']); 
+    
+if($info=='log in successful'){
+    include 'redirect.php';
+    header('location: comments.php');
+    
+   
+}
+
+}
+?>
 
 
 <!DOCTYPE html>
@@ -5,11 +29,11 @@
   <head>
      <meta charset="utf-8"/> 
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
      <link rel="stylesheet" type="text/css" href="/recordbreakers/review/css/bootstrap.min.css"/>
      <link rel="stylesheet" href="/recordbreakers/review/css/semantic.min.css" type="text/css"/>
      <link rel="stylesheet" href="/recordbreakers/review/css/jquery-ui.css" type="text/css"/>
-     <link rel="stylesheet" href="/recordbreakers/review/css/review.css" type="text/css"/>
+     <link rel="stylesheet" href="/recordbreakers/review/css/review.css" type="text/css"/>'
   </head>
   <body>
     <!-- top navbar-->
@@ -119,7 +143,7 @@
     <div class="modal fade resize modalmargin2" id="signin" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form class="form-horizontal" method="post">
+          <form class="form-horizontal" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" >
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -152,21 +176,3 @@
 </html>
 
 
-
-<?php
-include 'classes.php';
-$form=new FormProcess;
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitSignUpForm'])) {
-    
-echo $form->signUp($_POST['username'], $_POST['fullname'], $_POST['password'], $_POST['email'], $_POST['gender'],$_POST['confirmpassword']);   
-    
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitSignInForm'])) {
-    
-echo $form->signIn($_POST['username1'], $_POST['password1']);   
-    
-}
-
-
-?>

@@ -26,6 +26,11 @@
     margin-left: 32px;
     height: 50px;
 }
+.btnlarge2 {
+    width: 85%;
+    margin-left: 32px;
+    height: 50px;
+}
 #login {
     text-align: center;
     font-family: cursive;
@@ -39,8 +44,8 @@
     border-right: 2px solid grey;
 }
 body {
-    background-image: url("/recordbreakers/review/img/slide-1.jpg");
-    z-index: 0;
+    background: url("/recordbreakers/review/img/slide-1.jpg") repeat;
+        z-index: 0;
 }
 .botnav{
     border-top: 6px solid #337ab7;
@@ -58,10 +63,115 @@ body {
     border-top: 3px solid #337ab7; 
 }
 .check2{
-    margin-left: 300px;
+    display: inline;
     z-index: 1;
 }
 a.brand {
     color: dimgrey;
     text-decoration: none;
+}
+.text {
+   margin-left: 25px;
+   margin-top: 10px;
+text-align: left;
+
+    
+}
+.pan {
+    margin-top: 100px;
+    width: 500px;
+    margin-left: 300px;
+    z-index: -1;
+}
+.come{
+    font-family: monospace;
+    font-weight: bolder;
+    color: blue;
+}
+.badges {
+    margin-left: 15px;
+}
+.mediaElements {
+     margin-top: 100px;
+}
+.images {
+ width: 80px;
+    height: 80px;
+    margin-top: 90px;
+    
+}
+#title {
+    color: black;
+    margin-top: 70px;
+    margin-left: -15px;
+}
+.panel {
+    width: 600px;
+}
+.page-header {
+    margin-left: -60px;
+}
+#body {
+    margin-left: 100px;
+}
+#subthreads {
+    margin-left: 120px;
+    text-decoration: none;
+}
+a.subthread1,a.subthread2, a.subthread3, a.subthread4{
+    text-decoration: none;
+    color: black;
+}
+a.subthread1:link{
+    text-decoration: none;
+    color: black;
+}
+a.subthread2:link{
+    text-decoration: none;
+    color: black;
+}
+a.subthread3:link{
+    text-decoration: none;
+    color: black;
+}
+a.subthread4:link{
+    text-decoration: none;
+    color: black;
+}
+a.subthread1:hover {
+    color: purple;
+    font-size: 20px;
+}
+a.subthread1:visited {
+    color: blue;
+}
+a.subthread2:visited {
+    color: blue;
+}
+a.subthread3:visited {
+    color: blue;
+}
+a.subthread4:visited {
+    color: blue;
+}
+a.subthread1:active {
+    color: red;
+}
+a.subthread2:hover {
+    color: purple;
+    font-size: 20px;
+}
+a.subthread3:hover {
+    color: purple;
+    font-size: 20px;
+}
+a.subthread4:hover {
+    color: purple;
+    font-size: 20px;
+}
+.pull{
+    margin-top: 10px;
+}
+.subpanel {
+    margin-left: 100px;
 }

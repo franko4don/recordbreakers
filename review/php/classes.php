@@ -3,18 +3,29 @@
 
 class FormProcess extends DataBaseManage {
 
+    /**
+     * Filters the data sent to it to remove unwanted characters, white spaces and slashes
+     * @return (string,int)
+     * @param (Mostly string) 
+     * 
+     */
     function filterInput($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
+        
     }
 
+    /**
+     * Processes the data sent through the form by validating them and storing in database
+     * @return (string)
+     * @param (Mostly string) 
+     * 
+     */
     function signUp($username1, $fullname1, $password1, $email1, $gender1, $confirmpassword1) {
         $con = parent::connect();
-        $values=new  DataProcess;
-      
-        
+        $values = new DataProcess;
         $errors = array();
         $username = $this->filterInput($username1);
         $gender = $this->filterInput($gender1);
@@ -46,15 +57,15 @@ class FormProcess extends DataBaseManage {
         }
 
         if (count($errors) == 0) {
-            $valuesarr=array();
-            $password=md5($password);
-            array_push($valuesarr, $username,$fullname,$email,$password,$gender); 
-            
-            $data=$values->dataInsertProcess("user" ,$valuesarr);
-            
+            $valuesarr = array();
+            $password = md5($password);
+            array_push($valuesarr, $username, $fullname, $email, $password, $gender);
+
+            $data = $values->dataInsertProcess("user", $valuesarr);
+
             if (parent::usernameCheck($con, $username) == true && parent::emailCheck($con, $email) == true) {
-                
-                if (parent::createUser($con,$data)) {
+
+                if (parent::insertIntoTable($con, $data)) {
                     return "Account Succesfully created";
                 } else {
 
@@ -68,21 +79,29 @@ class FormProcess extends DataBaseManage {
         }
     }
 
+    /**
+     * Collects information from user, checks for user detail in databse and then grants access if it matches but does otherwise if it 
+     * doesn't
+     * @return (string)
+     * @param (Mostly string) 
+     * 
+     */
     function signIn($username1, $password1) {
         $username = $this->filterInput($username1);
         $password = $this->filterInput($password1);
         $con = parent::connect();
 
         if (parent::usernameCheck($con, $username)) {
-            echo 'username doesnt exist';
+            return 'username doesnt exist';
         } else {
             $exec = "select * from User where display_name='" . $username . "'";
             $result = mysqli_query($con, $exec);
             $row = mysqli_fetch_assoc($result);
             if ($row['password'] == md5($password)) {
-                echo 'log in successful';
+                return 'log in successful';
+                
             } else {
-                echo 'Wrong password';
+                return 'Wrong password';
             }
         }
     }
@@ -98,22 +117,40 @@ class FormProcess extends DataBaseManage {
 
 class DataBaseManage {
 
+    /**
+     * connects to the database in use
+     * @return (boolean)
+     * 
+     * 
+     */
     function connect() {
         $con = mysqli_connect("localhost", "franko4don", "", "lecture_review");
 // Check connection
         $validate_connection = mysqli_connect_errno();
         if ($validate_connection) {
+                        
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
         return $con;
     }
 
-    function createUser($con, $data) {
-        
+/**Inserts information into a selected table in the database 
+ *
+ * @param type $con
+ * @param type $data
+ * @return type(boolean) 
+ */    
+    function insertIntoTable($con, $data) {
         $test = mysqli_query($con, $data);
         return $test;
     }
 
+    /**
+     * Checks if username exists in database
+     * @return (boolean)
+     * 
+     * 
+     */
     function usernameCheck($con, $username) {
         $select_user = "select * from User where display_name='" . $username . "'";
         $check_user = mysqli_query($con, $select_user);
@@ -126,6 +163,12 @@ class DataBaseManage {
         }
     }
 
+    /**
+     * Checks if email exists in database
+     * @return (boolean)
+     * 
+     * 
+     */
     function emailCheck($con, $email) {
         $select_email = "select * from User where email='" . $email . "'";
         $check_email = mysqli_query($con, $select_email);
@@ -166,40 +209,42 @@ class Tasks {
 <?php
 
 class DataProcess extends Tables {
-
-    function dataInsertProcess($tablename,$values) {
-        
+ /**
+     * processes data to be inserted in any table using some algorithm
+     * @return (string)
+     * 
+     * 
+     */
+    function dataInsertProcess($tablename, $values) {
         $insert = "INSERT INTO " . $tablename . " ( ";
-        $array = parent::tablename($tablename);
+        $array = parent::tabledetails($tablename);
         $length1 = count($array);
-        
-        for($i=0; $i<$length1; $i++){
-            if($i==$length1-1){
-             $insert.=$array[$i];   
-            }else{
-            $insert.=$array[$i].',';
-            }
-        }
-        
-        $insert.=") VALUES (";
-        
-       $length2=count($values);
-        for($i=0; $i<$length2; $i++){
-            if($i==$length2-1){
-             $insert.="'".$values[$i]."'";   
-            }else{
-            $insert.="'".$values[$i]."'".',';
-            }
-        }
-        
-        
 
-        return $insert.');';
+        for ($i = 0; $i < $length1; $i++) {
+            if ($i == $length1 - 1) {
+                $insert.=$array[$i];
+            } else {
+                $insert.=$array[$i] . ',';
+            }
+        }
+
+        $insert.=") VALUES (";
+
+        $length2 = count($values);
+        for ($i = 0; $i < $length2; $i++) {
+            if ($i == $length2 - 1) {
+                $insert.="'" . $values[$i] . "'";
+            } else {
+                $insert.="'" . $values[$i] . "'" . ',';
+            }
+        }
+
+
+
+        return $insert . ');';
     }
 
 }
-
-
 ?>
 
 
@@ -208,31 +253,37 @@ class DataProcess extends Tables {
 // this class returns the column names of all the various tables in the data base
 class Tables {
 
-    function tablename($name) {
+     /**
+     * selects the needed table for operation
+     * @return (Array)
+     * 
+     * 
+     */
+    function tabledetails($name) {
         
         switch ($name) {
             case "user": return $this->user();
-            break;
-       
+                break;
+
             case "subthread": return $this->subthread();
-            break;
+                break;
             case "thread": return $this->thread();
-            break;
+                break;
             case "reaction":return $this->reaction();
-            break;
+                break;
             case "comment":return $this->comment();
-            break;
+                break;
             case "lecturer":return $this->lecturer();
-            break;
+                break;
             default : return array('Table doesnt exist');
         }
     }
 
-     private function user() {
-         
+    private function user() {
+
         $column = array();
-        array_push($column, 'display_name');       
-        array_push($column, 'full_name');      
+        array_push($column, 'display_name');
+        array_push($column, 'full_name');
         array_push($column, 'email');
         array_push($column, 'password');
         array_push($column, 'gender');

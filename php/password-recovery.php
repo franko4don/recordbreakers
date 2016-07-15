@@ -34,7 +34,7 @@
                         
                         <div class="form-group">
                             <label for="text" style="color: #7373ff;">Detail</label><br>
-                            <input type="text" name="detail" placeholder="Enter E-mail of Phone Number" style="width: 100%;">
+                            <input type="text" class="form-control" name="detail" placeholder="Enter E-mail of Phone Number" style="width: 100%;">
                         </div>
                         
                         <div class="form-group">
